@@ -1,14 +1,18 @@
+from functools import wraps
 from flask import Flask, Response, request, json, abort, redirect
 
 
 application = Flask(__name__)
 
 
-@application.before_request
-def before_request():
-    if not request.is_secure:
-        url = request.url.replace('http://', 'https://', 1)
-        return redirect(url, 302)
+def force_https(func):
+    @wraps(func)
+    def wrapped_f(*args, **kwargs):
+        if not request.is_secure:
+             url = request.url.replace('http://', 'https://', 1)
+             return redirect(url, 302)
+        return func(*args, **kwargs)
+    return wrapped_f
 
 
 @application.errorhandler(400)
@@ -20,12 +24,23 @@ def json_error_response(e):
         mimetype='application/json'
     )
 
+@force_https
 @application.route('/', methods=['GET'])
 def hello_world():
     resp = Response(
         response='Hello World!',
         status=200,
-        mimetype="application/json"
+        mimetype='application/json'
+    )
+    return resp
+
+
+@application.route('/healthcheck', methods=['GET'])
+def healthcheck():
+    resp = Response(
+        response='healthy',
+        status=200,
+        mimetype='text/plain'
     )
     return resp
 
