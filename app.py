@@ -45,6 +45,7 @@ def healthcheck():
     return resp
 
 
+@force_https
 @application.route('/error')
 def generate_error():
     abort(400, {'error': 'this is a error test'})
