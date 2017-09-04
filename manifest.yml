@@ -1,6 +1,6 @@
 applications:
 - name: mb-test
-  instances: 1
+  instances: 2
   memory: 256M
   disk_quota: 256M
   health-check-type: http
