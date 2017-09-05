@@ -8,7 +8,7 @@ things like easy and cheap WAF capabilities and serving static content from
 nginx rather than my python application.
 
 For the TL;DR crowd --  
-The multiback -- https://github.com/cloudfoundry-incubator/multi-buildpack  
+The multi-buildpack -- https://github.com/cloudfoundry-incubator/multi-buildpack  
 My example app -- https://github.com/epoelke/multibuildpack-test-app
 
 The first thing that changes is that in your manifest you have a reference to
