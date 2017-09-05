@@ -1,6 +1,6 @@
 I recently came across a pretty interesting Cloud Foundry project called the
 multi-buildpack.  Basically this is a buildpack that allows you to use more
-than one buildpack for you application.  This can be great if you application
+than one buildpack for your application.  This can be great if you application
 has need of more than one language or if you are interested in fronting your
 application with nginx and the staticfile buildpack.  I was most interested in
 fronting some Python applications with nginx to take advantage of some of
