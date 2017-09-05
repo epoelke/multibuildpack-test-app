@@ -7,7 +7,7 @@ fronting some Python applications with nginx to take advantage of some of
 things like easy and cheap WAF capabilities and serving static content from
 nginx rather than my python application.
 
-For the TL;DR crowd --
+For the TL;DR crowd --  
 The multiback -- https://github.com/cloudfoundry-incubator/multi-buildpack
 My example app -- https://github.com/epoelke/multibuildpack-test-app
 
