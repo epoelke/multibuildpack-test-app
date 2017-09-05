@@ -62,7 +62,7 @@ will be seen as "healthy" by Cloud Foundry.  Process is also a bad option here
 since we are starting multiple processes.  All the processes would need to die
 for the application be be seen as unhealthy.  So that leaves us with HTTP as
 the best option.  The HTTP health check will by default perform an HTTP GET on
-/ and it it receives a 200 then it is seen as healthy.  The default behavior
+/ and if it receives a 200 then it is seen as healthy.  The default behavior
 may have the same problem as the PORT strategy.  But the HTTP endpoint also
 allows you to provide a custom endpoint for health checking.  This nicely
 solves health checking for both nginx and our application.  So I implemented a
