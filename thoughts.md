@@ -1,9 +1,9 @@
 I recently came across a pretty interesting Cloud Foundry project called the
 multi-buildpack.  Basically this is a buildpack that allows you to use more
-than one buildpack for your application.  This can be great if you application
+than one buildpack for your application.  This can be great if your application
 has need of more than one language or if you are interested in fronting your
 application with nginx and the staticfile buildpack.  I was most interested in
-fronting some Python applications with nginx to take advantage of some of
+fronting some Python applications with nginx to take advantage of some of the
 things like easy and cheap WAF capabilities and serving static content from
 nginx rather than my python application.
 
@@ -33,7 +33,7 @@ that the behavior of that buildpack for things like built in startup commands
 or anything else will be the behavior you should expect.  In my case the
 behavior of the staticfile buildpack is what happened.
 
-When using the staticfile buildpack just to get nginx you should always push in
+When using the staticfile buildpack just to get nginx, you should always push in
 a custom nginx.conf file as part of your application to avoid any accidental
 configuration mishaps.  You can see the example nginx.conf in the
 multibuildpack-test-app github repo.  The configuration I used has some rate
@@ -46,7 +46,7 @@ My Python application is configured to listen on a unix socket instead of an IP
 address and nginx actually proxies requests to the unix socket.  This approach
 has a bit less overhead by eliminating TCP and we want to be as optimized as
 possible running inside a container.  So you can see the proxypass directive in
-the nginx.conf file points to a unix socket instead of an IP.  Its also
+the nginx.conf file points to a unix socket instead of an IP.  It's also
 important to set the server directive to `_`.  This will cause nginx to accept
 requests for any hostname it receives and makes your configuration nice and
 templated.  You can also force HTTPS connections only to nginx endpoints by
@@ -62,7 +62,7 @@ will be seen as "healthy" by Cloud Foundry.  Process is also a bad option here
 since we are starting multiple processes.  All the processes would need to die
 for the application be be seen as unhealthy.  So that leaves us with HTTP as
 the best option.  The HTTP health check will by default perform an HTTP GET on
-/ and it it receives a 200 then it is seen as healthy.  The default behavior
+/ and if it receives a 200 then it is seen as healthy.  The default behavior
 may have the same problem as the PORT strategy.  But the HTTP endpoint also
 allows you to provide a custom endpoint for health checking.  This nicely
 solves health checking for both nginx and our application.  So I implemented a
@@ -72,7 +72,7 @@ nginx and the application.
 The last thing that needed to be customized was the start command for the
 application.  In my case I needed to start both the Python application (running
 in uwsgi application server) and nginx.  Since the last buildpack in my
-multi-buildpack.yml file is staticfile the startup behavior is that of the
+multi-buildpack.yml file is staticfile, the startup behavior is that of the
 staticfile buildpack.  It has a built-in startup command (boot.sh) so one is
 not typically provided when using this buildpack.  But since I needed to start
 my Python process first we needed to provide one and then invoke the nginx
